@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-header bg-dark text-white text-center py-3 rounded-top-4">
+                <h3 class="mb-0">Model İçin Eğitim Verisi Ekle</h3>
+            </div>
+
+            <div class="card-body p-4">
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Yaş</label>
+                        <input type="number" name="age" class="form-control" min="1" max="120" required>
+                    </div>
+
+                    <hr>
+
+                    <h5 class="text-danger mb-3">Belirtiler</h5>
+
+                    {% for field, label in [
+                        ('fever','Ateş'),
+                        ('cough','Öksürük'),
+                        ('headache','Baş Ağrısı'),
+                        ('muscle_pain','Kas Ağrısı'),
+                        ('shortness_breath','Nefes Darlığı'),
+                        ('fatigue','Halsizlik'),
+                        ('nausea','Bulantı'),
+                        ('vomiting','Kusma'),
+                        ('abdominal_pain','Karın Ağrısı'),
+                        ('diarrhea','İshal')
+                    ] %}
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">{{ label }}</label>
+                        <select name="{{ field }}" class="form-select" required>
+                            <option value="0">Hayır</option>
+                            <option value="1">Evet</option>
+                        </select>
+                    </div>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    <h5 class="text-danger mb-3">Çevresel Risk Faktörleri</h5>
+
+                    {% for field, label in [
+                        ('rodent_contact','Kemirgen Teması'),
+                        ('rodent_droppings','Kemirgen Dışkısı'),
+                        ('storage_cleaning','Depo/Ahır Temizliği'),
+                        ('rural_visit','Kırsal Bölge Ziyareti'),
+                        ('camping_history','Kamp Geçmişi')
+                    ] %}
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">{{ label }}</label>
+                        <select name="{{ field }}" class="form-select" required>
+                            <option value="0">Hayır</option>
+                            <option value="1">Evet</option>
+                        </select>
+                    </div>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    <h5 class="text-dark mb-3">Gerçek Risk Sonucu</h5>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Bu kaydın gerçek risk durumu nedir?</label>
+                        <select name="actual_result" class="form-select" required>
+                            <option value="">Seçiniz...</option>
+                            <option value="0">Düşük Risk</option>
+                            <option value="1">Yüksek Risk</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark btn-lg w-100 mt-3">
+                        Veriyi Ekle ve Modeli Yeniden Eğit
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
